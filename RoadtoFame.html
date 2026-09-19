@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Road to Hall of Fame | Portafolio</title>
+  
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="blog.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+
+  <style>
+    /* Estilos para el Camino Zigzag (Timeline) */
+.roadmap-header {
+  background: #1a1e21; /* Tono oscuro profesional */
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: .3rem;
+  margin-bottom: 4rem;
+}
+
+/* Contenedor principal del camino */
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Línea central punteada */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  border-left: 4px dashed #adb5bd; /* Línea punteada tipo mapa */
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+  z-index: 1;
+}
+
+/* Cada parada (nodo) en el camino */
+.timeline-node {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+  margin-bottom: 2rem;
+}
+
+/* Alternar izquierda y derecha */
+.timeline-node:nth-child(odd) {
+  left: 0;
+}
+.timeline-node:nth-child(even) {
+  left: 50%;
+}
+
+/* El círculo del número (El marcador del mapa) */
+.timeline-node::after {
+  content: attr(data-number);
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background-color: #0d6efd;
+  border: 4px solid #f8f9fa;
+  top: 20px;
+  border-radius: 50%;
+  z-index: 2;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 0 0 3px #0d6efd;
+}
+
+/* Posición del círculo dependiendo del lado */
+.timeline-node:nth-child(odd)::after {
+  right: -24px;
+}
+.timeline-node:nth-child(even)::after {
+  left: -24px;
+}
+
+/* Nodos bloqueados (candado o grises) */
+.timeline-node.locked::after {
+  background-color: #6c757d;
+  box-shadow: 0 0 0 3px #6c757d;
+  content: "🔒";
+  font-size: 1rem;
+}
+
+/* La tarjeta con el contenido del laboratorio */
+.timeline-content {
+  padding: 1.5rem;
+  background-color: white;
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  border-color: #0d6efd;
+}
+
+/* Flechas conectoras hacia la línea central */
+.timeline-node:nth-child(odd) .timeline-content::after {
+  content: " ";
+  position: absolute;
+  top: 28px;
+  right: -12px;
+  border-width: 12px 0 12px 12px;
+  border-style: solid;
+  border-color: transparent transparent transparent #dee2e6;
+}
+.timeline-node:nth-child(even) .timeline-content::after {
+  content: " ";
+  position: absolute;
+  top: 28px;
+  left: -12px;
+  border-width: 12px 12px 12px 0;
+  border-style: solid;
+  border-color: transparent #dee2e6 transparent transparent;
+}
+
+.lab-img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  margin-bottom: 1rem;
+}
+
+/* Responsividad: En celulares, todo se alinea a la izquierda */
+@media screen and (max-width: 768px) {
+  .timeline::after {
+    left: 31px;
+  }
+  .timeline-node {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 15px;
+    left: 0 !important;
+  }
+  .timeline-node::after {
+    left: 7px !important;
+    right: auto !important;
+  }
+  .timeline-node:nth-child(odd) .timeline-content::after,
+  .timeline-node:nth-child(even) .timeline-content::after {
+    left: -12px;
+    right: auto;
+    border-width: 12px 12px 12px 0;
+    border-color: transparent #dee2e6 transparent transparent;
+  }
+}
+  </style>
+</head>
+<body>
+    
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1"></div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="index.html">Portafolio</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center"></div>
+    </div>
+  </header>
+
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 link-secondary" href="index.html">Sobre mi</a>
+      <a class="p-2 link-secondary" href="#">Herramientas</a>
+      <a class="p-2 link-secondary" href="#">Proyectos</a>
+      <a class="p-2 link-secondary" href="#">Certificados</a>
+      <a class="p-2 link-secondary" href="hall-of-fame.html">Road to Hall of Fame</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container">
+  
+  <!-- Encabezado y Botón de Descarga -->
+  <div class="roadmap-header d-flex flex-column flex-md-row justify-content-between align-items-center">
+    <div>
+      <h1 class="display-5 fst-italic mb-2 text-white">ROAD TO HALL OF FAME</h1>
+      <p class="lead mb-0 text-light">Ruta de progreso de laboratorios de Ciberseguridad.</p>
+    </div>
+    <div class="mt-4 mt-md-0">
+      <!-- <a href="ruta/a/tu/documento_completo.pdf" download class="btn btn-primary btn-lg shadow fw-bold">
+        📥 Descargar Documento PDF
+      </a> -->
+    </div>
+  </div>
+
+  <!-- Contenedor del Camino Zigzag -->
+  <div class="timeline">
+    
+    <!-- Laboratorio 01 (Se posicionará a la IZQUIERDA) -->
+    <div class="timeline-node" data-number="01">
+      <div class="timeline-content">
+        <h3 class="h5 text-primary fw-bold"><a href="lab7.html">File Path Traversal: Simple Case</a></h3>
+        <img src="Gemini_Generated_Image_aw5nzhaw5nzhaw5n.jpg" alt="Lab 01" class="lab-img mt-2">
+        <p class="small"><strong>Descripción:</strong>Este laboratorio contiene una vulnerabilidad de recorrido de directorios 
+          (*path traversal*) en la visualización de imágenes de productos.
+Para resolver el laboratorio, obtén el contenido del archivo `/etc/passwd`.</p>
+        <!-- <p class="small mb-0 text-muted"><strong>Evidencia:</strong> Intercepción HTTP inyectando payload <code>../../../etc/passwd</code>, visualizando credenciales locales.</p> -->
+          <a href="LAB 7 FILE PATH TRAVERSAL.pdf" download class="btn btn-primary btn-lg shadow fw-bold" >📥 Descargar PDF</a>
+         
+      </div>
+    </div>
+<!-- 
+    <div class="timeline-node" data-number="02">
+      <div class="timeline-content">
+        <h3 class="h5 text-primary fw-bold">Traversal Blocked: Absolute Path Bypass</h3>
+        <img src="ruta/a/tu/imagen_lab2.jpg" alt="Lab 02" class="lab-img mt-2">
+        <p class="small"><strong>Descripción:</strong> Evasión de filtros de seguridad que bloquean secuencias relativas (../) utilizando rutas absolutas directamente.</p>
+        <p class="small mb-0 text-muted"><strong>Evidencia:</strong> Envío directo de ruta absoluta <code>/etc/passwd</code>, demostrando validación insuficiente en el backend.</p>
+      </div>
+    </div>
+
+    <div class="timeline-node" data-number="03">
+      <div class="timeline-content">
+        <h3 class="h5 text-primary fw-bold">Traversal Stripped Non-Recursively</h3>
+        <img src="ruta/a/tu/imagen_lab3.jpg" alt="Lab 03" class="lab-img mt-2">
+        <p class="small"><strong>Descripción:</strong> Evasión de filtros que eliminan la secuencia `../` pero no lo hacen de forma recursiva (ej. usando `....//`).</p>
+        <p class="small mb-0 text-muted"><strong>Evidencia:</strong> Inyección del payload <code>....//....//etc/passwd</code> saltando el filtro del servidor.</p>
+      </div>
+    </div> -->
+
+    <!-- Laboratorio 04 (Próximo / Bloqueado - DERECHA) -->
+    <div class="timeline-node locked" data-number="04">
+      <div class="timeline-content bg-light">
+        <h3 class="h5 text-secondary fw-bold">LAB: FILE PATH TRAVERSAL
+TRAVERSAL SEQUENCES BLOCKED 
+WITH ABSOLUTE PATH BYPASS</h3>
+        <div style="height: 120px; background: #e9ecef; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin: 10px 0;">
+          <span class="text-muted">🔒 Pendiente</span>
+        </div>
+        <p class="small text-muted mb-0">La descripción y evidencia técnica se añadirán una vez completado el laboratorio.</p>
+      </div>
+    </div>
+
+    <div class="timeline-node locked" data-number="04">
+      <div class="timeline-content bg-light">
+        <h3 class="h5 text-secondary fw-bold">LAB: FILE PATH TRAVERSAL
+TRAVERSAL SEQUENCES STRIPPED 
+NON-RECURSIVELY</h3>
+        <div style="height: 120px; background: #e9ecef; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin: 10px 0;">
+          <span class="text-muted">🔒 Pendiente</span>
+        </div>
+        <p class="small text-muted mb-0">La descripción y evidencia técnica se añadirán una vez completado el laboratorio.</p>
+      </div>
+    </div>
+
+    <div class="timeline-node locked" data-number="04">
+      <div class="timeline-content bg-light">
+        <h3 class="h5 text-secondary fw-bold">LAB: FILE PATH TRAVERSAL
+TRAVERSAL SEQUENCES STRIPPED 
+WITH SUPERFLUOUS URL-DECODE</h3>
+        <div style="height: 120px; background: #e9ecef; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin: 10px 0;">
+          <span class="text-muted">🔒 Pendiente</span>
+        </div>
+        <p class="small text-muted mb-0">La descripción y evidencia técnica se añadirán una vez completado el laboratorio.</p>
+      </div>
+    </div>
+
+    <div class="timeline-node locked" data-number="04">
+      <div class="timeline-content bg-light">
+        <h3 class="h5 text-secondary fw-bold">LAB: FILE PATH TRAVERSAL
+VALIDATION OF START OF PATH</h3>
+        <div style="height: 120px; background: #e9ecef; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin: 10px 0;">
+          <span class="text-muted">🔒 Pendiente</span>
+        </div>
+        <p class="small text-muted mb-0">La descripción y evidencia técnica se añadirán una vez completado el laboratorio.</p>
+      </div>
+    </div>
+
+    <div class="timeline-node locked" data-number="04">
+      <div class="timeline-content bg-light">
+        <h3 class="h5 text-secondary fw-bold">LAB: FILE PATH TRAVERSAL
+VALIDATION OF FILE EXTENSION 
+WITH NULL BYTE BYPASS</h3>
+        <div style="height: 120px; background: #e9ecef; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin: 10px 0;">
+          <span class="text-muted">🔒 Pendiente</span>
+        </div>
+        <p class="small text-muted mb-0">La descripción y evidencia técnica se añadirán una vez completado el laboratorio.</p>
+      </div>
+    </div>
+
+  </div> <!-- Fin Timeline -->
+
+</main>
+
+<footer class="blog-footer border-top pt-4 text-center mt-5 mb-4">
+  <p>Portafolio de Ciberseguridad - Universidad Politécnica de San Luis Potosí</p>
+  <p><a href="#">Volver arriba</a></p>
+</footer>
+
+</body>
+</html>
