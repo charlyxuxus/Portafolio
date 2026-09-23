@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reporte de Laboratorio · Portafolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <link href="blog.css" rel="stylesheet">
+  </head>
+  <body>
+    
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1"></div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="index.html">Portafolio</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center"></div>
+    </div>
+  </header>
+
+  <!-- Barra de navegación -->
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 link-secondary" href="index.html">Inicio</a>
+      <a class="p-2 link-secondary" href="#">Sobre mi</a>
+      <a class="p-2 link-secondary" href="#">Herramientas</a>
+      <a class="p-2 link-secondary" href="#">Proyectos</a>
+      <a class="p-2 link-secondary" href="#">Certificados</a>
+      <a class="p-2 link-secondary" href="RoadtoFame.html">Road to Hall of Fame</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container my-4">
+  <!-- Encabezado del laboratorio -->
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark shadow">
+    <div class="col-md-10 px-0">
+      <h1 class="display-4 fst-italic">Laboratorio de Path Traversal</h1>
+      <p class="lead my-3">FILE PATH TRAVERSAL TRAVERSAL SEQUENCES BLOCKED WITH ABSOLUTE PATH BYPASS </p>
+      <p class="mb-0"><strong>Nivel:</strong> Apprentice | <strong>Tipo de explotación:</strong> PATH TRAVERSAL </p>
+    </div>
+  </div>
+
+  <div class="row g-5 mb-5">
+    <!-- SECCIÓN DE TEXTO DEL REPORTE -->
+    <div class="col-md-8">
+      <article class="blog-post p-4 bg-light rounded shadow-sm">
+        <h2 class="blog-post-title mb-4 border-bottom pb-2">Detalles del Reporte</h2>
+        
+        <h4 class="mt-4 text-primary">Objetivo del laboratorio</h4>
+        <p class="fs-6 text-justify">El objetivo de este laboratorio es explotar una vulnerabilidad de path traversal en la visualización de imágenes de productos donde, a pesar de bloquear secuencias de escape comunes, la aplicación interpreta el archivo proporcionado en relación con un directorio de trabajo predeterminado; para resolverlo, debes evadir esta restricción lógica y lograr extraer con éxito el contenido del archivo crítico del sistema operativo, /etc/passwd. </p>
+
+        <h4 class="mt-4 text-primary">Explicación técnica de la vulnerabilidad</h4>
+        <p class="text-justify">La vulnerabilidad radica en una deficiencia en el control de acceso y en la validación de entradas de la aplicación, la cual intenta mitigar el riesgo de path traversal bloqueando únicamente las secuencias relativas de navegación (como ../); sin embargo, al no restringir el uso de rutas absolutas, el sistema procesa el parámetro de entrada de forma literal desde la raíz del servidor-ignorando el directorio de trabajo predeterminado-, lo que permite a un atacante omitir los filtros implementados y acceder de manera ilegítima a recursos críticos del sistema operativo, tales como el archivo /etc/passwd. </p>
+
+        <h4 class="mt-4 text-primary">Procedimiento paso a paso</h4>
+        <ol>
+          <li class="mb-2">El proceso inicia con la apertura de la aplicación Burp Suite y el uso de su navegador integrado, el cual evita conflictos de configuración con certificados de seguridad. </li>
+          <li class="mb-2">En la sección Proxy > Intercept, se verifica que la función de intercepción se encuentre activada (Intercept is on) para pausar y capturar de manera temporal las peticiones HTTP.</li>
+          <li class="mb-2">Una vez capturada la solicitud HTTP objetivo, se hace clic derecho sobre ella para desplegar el menú contextual y se selecciona la opción Send to Repeater. </li>
+          <li class="mb-2">Dentro de la herramienta Repeater, en la solicitud <code>GET /image?filename=</code>, se reemplaza el nombre del archivo de imagen original por la ruta absoluta <code>/etc/passwd</code>.</li>
+          <li class="mb-2">Al enviar la solicitud modificada, se observa que el servidor la procesa correctamente y devuelve una respuesta con el código de estado HTTP/2 200 OK, exponiendo el contenido íntegro del archivo solicitado. </li>
+        </ol>
+
+        <h4 class="mt-4 text-primary">Explicación del payload</h4>
+        <p class="text-justify">El payload utilizado en este laboratorio consiste en una ruta absoluta directa, específicamente <code>/etc/passwd</code>, la cual se introduce en el parámetro afectado sin incluir ninguna secuencia de navegación relativa (../).  Esta estructura elude el filtro de la aplicación permitiendo que la función de lectura de archivos del servidor interprete la entrada desde la raíz del sistema de archivos. </p>
+
+        <h4 class="mt-4 text-primary">Mitigación recomendada</h4>
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item bg-transparent"><strong>Uso de funciones de mapeo seguro (Basename):</strong> Utilizar funciones integradas en el lenguaje de programación que extraigan únicamente el nombre del archivo solicitado. </li>
+          <li class="list-group-item bg-transparent"><strong>Validación mediante listas blancas (Whitelisting):</strong> Restringir los valores permitidos en los parámetros de entrada a un conjunto estricto de nombres de archivos válidos o identificadores predefinidos. </li>
+          <li class="list-group-item bg-transparent"><strong>Directorio raíz confinado (Chroot o aislamiento):</strong> Asegurarse de que la aplicación web se ejecute con privilegios mínimos y que el acceso a los archivos esté estrictamente limitado a un directorio específico del sistema de archivos. </li>
+        </ul>
+
+      </article>
+    </div>
+
+    <!-- SECCIÓN PARA MOSTRAR EL PDF (Columna lateral) -->
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div class="card shadow-sm border-0 bg-light">
+          <div class="card-body">
+            <h5 class="card-title mb-3 text-center">Documento Original</h5>
+            
+            <!-- Etiqueta iframe para incrustar el PDF -->
+            <div class="ratio ratio-4x3 mb-3" style="min-height: 500px;">
+              <iframe src="lab8.pdf" title="PDF Viewer" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            
+            <div class="d-grid gap-2">
+              <a href="lab8.pdf" target="_blank" class="btn btn-outline-dark">Abrir PDF en pestaña nueva</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="blog-footer text-center py-4 mt-5 bg-light border-top">
+  <p>Portafolio digital - CNO IV Seguridad Informática</p>
+  <p><a href="#" class="text-decoration-none text-secondary">Volver arriba</a></p>
+</footer>
+
+  </body>
+</html>
