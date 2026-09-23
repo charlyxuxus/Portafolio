@@ -208,12 +208,26 @@
     <div class="timeline-node" data-number="01">
       <div class="timeline-content">
         <h3 class="h5 text-primary fw-bold"><a href="lab7.html">File Path Traversal: Simple Case</a></h3>
-        <img src="Gemini_Generated_Image_aw5nzhaw5nzhaw5n.jpg" alt="Lab 01" class="lab-img mt-2">
-        <p class="small"><strong>Descripción:</strong>Este laboratorio contiene una vulnerabilidad de recorrido de directorios 
-          (*path traversal*) en la visualización de imágenes de productos.
-Para resolver el laboratorio, obtén el contenido del archivo `/etc/passwd`.</p>
+        <img src="fotoslab/portlab7.png" alt="Lab 01" class="lab-img mt-2">
+        <p class="small"><strong>Descripción:</strong>El objetivo de este laboratorio es explotar una vulnerabilidad de Path Traversal 
+          en la funcionalidad de visualización de imágenes de productos de la aplicación web, con el fin de leer y recuperar el contenido del archivo /etc/passwd del servidor.</p>
         <!-- <p class="small mb-0 text-muted"><strong>Evidencia:</strong> Intercepción HTTP inyectando payload <code>../../../etc/passwd</code>, visualizando credenciales locales.</p> -->
           <a href="LAB 7 FILE PATH TRAVERSAL.pdf" download class="btn btn-primary btn-lg shadow fw-bold" >📥 Descargar PDF</a>
+         
+      </div>
+    </div>
+
+    <div class="timeline-node" data-number="02">
+      <div class="timeline-content">
+        <h3 class="h5 text-primary fw-bold"><a href="lab8.html">File path traversal, traversal sequences blocked with absolute path bypass</a></h3>
+        <img src="fotoslab/portlab8.png" alt="Lab 01" class="lab-img mt-2">
+        <p class="small"><strong>Descripción:</strong>El objetivo de este laboratorio es explotar una vulnerabilidad 
+          de path traversal en la visualización de imágenes de productos donde, a pesar de bloquear secuencias de escape 
+          comunes, la aplicación interpreta el archivo proporcionado en relación con un directorio de trabajo predeterminado; 
+          para resolverlo, debes evadir esta restricción lógica y lograr extraer con éxito el contenido del archivo crítico del 
+          sistema operativo, /etc/passwd.</p>
+        <!-- <p class="small mb-0 text-muted"><strong>Evidencia:</strong> Intercepción HTTP inyectando payload <code>../../../etc/passwd</code>, visualizando credenciales locales.</p> -->
+          <a href="lab8.pdf" download class="btn btn-primary btn-lg shadow fw-bold" >📥 Descargar PDF</a>
          
       </div>
     </div>
@@ -236,18 +250,7 @@ Para resolver el laboratorio, obtén el contenido del archivo `/etc/passwd`.</p>
       </div>
     </div> -->
 
-    <!-- Laboratorio 04 (Próximo / Bloqueado - DERECHA) -->
-    <div class="timeline-node locked" data-number="04">
-      <div class="timeline-content bg-light">
-        <h3 class="h5 text-secondary fw-bold">LAB: FILE PATH TRAVERSAL
-TRAVERSAL SEQUENCES BLOCKED 
-WITH ABSOLUTE PATH BYPASS</h3>
-        <div style="height: 120px; background: #e9ecef; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin: 10px 0;">
-          <span class="text-muted">🔒 Pendiente</span>
-        </div>
-        <p class="small text-muted mb-0">La descripción y evidencia técnica se añadirán una vez completado el laboratorio.</p>
-      </div>
-    </div>
+    
 
     <div class="timeline-node locked" data-number="04">
       <div class="timeline-content bg-light">
