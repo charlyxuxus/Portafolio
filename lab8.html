@@ -33,7 +33,6 @@
       <a class="p-2 link-secondary" href="#">Herramientas</a>
       <a class="p-2 link-secondary" href="#">Proyectos</a>
       <a class="p-2 link-secondary" href="#">Certificados</a>
-      <a class="p-2 link-secondary" href="RoadtoFame.html">Road to Hall of Fame</a>
     </nav>
   </div>
 </div>
@@ -43,8 +42,8 @@
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark shadow">
     <div class="col-md-10 px-0">
       <h1 class="display-4 fst-italic">Laboratorio de Path Traversal</h1>
-      <p class="lead my-3">FILE PATH TRAVERSAL TRAVERSAL SEQUENCES BLOCKED WITH ABSOLUTE PATH BYPASS </p>
-      <p class="mb-0"><strong>Nivel:</strong> Apprentice | <strong>Tipo de explotación:</strong> PATH TRAVERSAL </p>
+      <p class="lead my-3">FILE PATH TRAVERSAL TRAVERSAL SEQUENCES BLOCKED WITH ABSOLUTE PATH BYPASS[cite: 3]</p>
+      <p class="mb-0"><strong>Nivel:</strong> Apprentice | <strong>Tipo de explotación:</strong> PATH TRAVERSAL[cite: 3]</p>
     </div>
   </div>
 
@@ -55,28 +54,28 @@
         <h2 class="blog-post-title mb-4 border-bottom pb-2">Detalles del Reporte</h2>
         
         <h4 class="mt-4 text-primary">Objetivo del laboratorio</h4>
-        <p class="fs-6 text-justify">El objetivo de este laboratorio es explotar una vulnerabilidad de path traversal en la visualización de imágenes de productos donde, a pesar de bloquear secuencias de escape comunes, la aplicación interpreta el archivo proporcionado en relación con un directorio de trabajo predeterminado; para resolverlo, debes evadir esta restricción lógica y lograr extraer con éxito el contenido del archivo crítico del sistema operativo, /etc/passwd. </p>
+        <p class="fs-6 text-justify">El objetivo de este laboratorio es explotar una vulnerabilidad de path traversal en la visualización de imágenes de productos donde, a pesar de bloquear secuencias de escape comunes, la aplicación interpreta el archivo proporcionado en relación con un directorio de trabajo predeterminado; para resolverlo, debes evadir esta restricción lógica y lograr extraer con éxito el contenido del archivo crítico del sistema operativo, /etc/passwd.[cite: 3]</p>
 
         <h4 class="mt-4 text-primary">Explicación técnica de la vulnerabilidad</h4>
-        <p class="text-justify">La vulnerabilidad radica en una deficiencia en el control de acceso y en la validación de entradas de la aplicación, la cual intenta mitigar el riesgo de path traversal bloqueando únicamente las secuencias relativas de navegación (como ../); sin embargo, al no restringir el uso de rutas absolutas, el sistema procesa el parámetro de entrada de forma literal desde la raíz del servidor-ignorando el directorio de trabajo predeterminado-, lo que permite a un atacante omitir los filtros implementados y acceder de manera ilegítima a recursos críticos del sistema operativo, tales como el archivo /etc/passwd. </p>
+        <p class="text-justify">La vulnerabilidad radica en una deficiencia en el control de acceso y en la validación de entradas de la aplicación, la cual intenta mitigar el riesgo de path traversal bloqueando únicamente las secuencias relativas de navegación (como ../); sin embargo, al no restringir el uso de rutas absolutas, el sistema procesa el parámetro de entrada de forma literal desde la raíz del servidor-ignorando el directorio de trabajo predeterminado-, lo que permite a un atacante omitir los filtros implementados y acceder de manera ilegítima a recursos críticos del sistema operativo, tales como el archivo /etc/passwd.[cite: 3]</p>
 
         <h4 class="mt-4 text-primary">Procedimiento paso a paso</h4>
         <ol>
-          <li class="mb-2">El proceso inicia con la apertura de la aplicación Burp Suite y el uso de su navegador integrado, el cual evita conflictos de configuración con certificados de seguridad. </li>
-          <li class="mb-2">En la sección Proxy > Intercept, se verifica que la función de intercepción se encuentre activada (Intercept is on) para pausar y capturar de manera temporal las peticiones HTTP.</li>
-          <li class="mb-2">Una vez capturada la solicitud HTTP objetivo, se hace clic derecho sobre ella para desplegar el menú contextual y se selecciona la opción Send to Repeater. </li>
-          <li class="mb-2">Dentro de la herramienta Repeater, en la solicitud <code>GET /image?filename=</code>, se reemplaza el nombre del archivo de imagen original por la ruta absoluta <code>/etc/passwd</code>.</li>
-          <li class="mb-2">Al enviar la solicitud modificada, se observa que el servidor la procesa correctamente y devuelve una respuesta con el código de estado HTTP/2 200 OK, exponiendo el contenido íntegro del archivo solicitado. </li>
+          <li class="mb-2">El proceso inicia con la apertura de la aplicación Burp Suite y el uso de su navegador integrado, el cual evita conflictos de configuración con certificados de seguridad.[cite: 3]</li>
+          <li class="mb-2">En la sección Proxy > Intercept, se verifica que la función de intercepción se encuentre activada (Intercept is on) para pausar y capturar de manera temporal las peticiones HTTP.[cite: 3]</li>
+          <li class="mb-2">Una vez capturada la solicitud HTTP objetivo, se hace clic derecho sobre ella para desplegar el menú contextual y se selecciona la opción Send to Repeater.[cite: 3]</li>
+          <li class="mb-2">Dentro de la herramienta Repeater, en la solicitud <code>GET /image?filename=</code>, se reemplaza el nombre del archivo de imagen original por la ruta absoluta <code>/etc/passwd</code>.[cite: 3]</li>
+          <li class="mb-2">Al enviar la solicitud modificada, se observa que el servidor la procesa correctamente y devuelve una respuesta con el código de estado HTTP/2 200 OK, exponiendo el contenido íntegro del archivo solicitado.[cite: 3]</li>
         </ol>
 
         <h4 class="mt-4 text-primary">Explicación del payload</h4>
-        <p class="text-justify">El payload utilizado en este laboratorio consiste en una ruta absoluta directa, específicamente <code>/etc/passwd</code>, la cual se introduce en el parámetro afectado sin incluir ninguna secuencia de navegación relativa (../).  Esta estructura elude el filtro de la aplicación permitiendo que la función de lectura de archivos del servidor interprete la entrada desde la raíz del sistema de archivos. </p>
+        <p class="text-justify">El payload utilizado en este laboratorio consiste en una ruta absoluta directa, específicamente <code>/etc/passwd</code>, la cual se introduce en el parámetro afectado sin incluir ninguna secuencia de navegación relativa (../).[cite: 3] Esta estructura elude el filtro de la aplicación permitiendo que la función de lectura de archivos del servidor interprete la entrada desde la raíz del sistema de archivos.[cite: 3]</p>
 
         <h4 class="mt-4 text-primary">Mitigación recomendada</h4>
         <ul class="list-group list-group-flush mb-3">
-          <li class="list-group-item bg-transparent"><strong>Uso de funciones de mapeo seguro (Basename):</strong> Utilizar funciones integradas en el lenguaje de programación que extraigan únicamente el nombre del archivo solicitado. </li>
-          <li class="list-group-item bg-transparent"><strong>Validación mediante listas blancas (Whitelisting):</strong> Restringir los valores permitidos en los parámetros de entrada a un conjunto estricto de nombres de archivos válidos o identificadores predefinidos. </li>
-          <li class="list-group-item bg-transparent"><strong>Directorio raíz confinado (Chroot o aislamiento):</strong> Asegurarse de que la aplicación web se ejecute con privilegios mínimos y que el acceso a los archivos esté estrictamente limitado a un directorio específico del sistema de archivos. </li>
+          <li class="list-group-item bg-transparent"><strong>Uso de funciones de mapeo seguro (Basename):</strong> Utilizar funciones integradas en el lenguaje de programación que extraigan únicamente el nombre del archivo solicitado.[cite: 3]</li>
+          <li class="list-group-item bg-transparent"><strong>Validación mediante listas blancas (Whitelisting):</strong> Restringir los valores permitidos en los parámetros de entrada a un conjunto estricto de nombres de archivos válidos o identificadores predefinidos.[cite: 3]</li>
+          <li class="list-group-item bg-transparent"><strong>Directorio raíz confinado (Chroot o aislamiento):</strong> Asegurarse de que la aplicación web se ejecute con privilegios mínimos y que el acceso a los archivos esté estrictamente limitado a un directorio específico del sistema de archivos.[cite: 3]</li>
         </ul>
 
       </article>
@@ -96,6 +95,8 @@
             
             <div class="d-grid gap-2">
               <a href="lab8.pdf" target="_blank" class="btn btn-outline-dark">Abrir PDF en pestaña nueva</a>
+              <!-- Botón de descarga agregado aquí -->
+              <a href="lab8.pdf" download class="btn btn-dark">Descargar PDF</a>
             </div>
           </div>
         </div>
