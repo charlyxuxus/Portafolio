@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reporte de Laboratorio · Portafolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900&amp;display=swap" rel="stylesheet">
+    <link href="blog.css" rel="stylesheet">
+  </head>
+  <body>
+    
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1"></div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="index.html">Portafolio</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center"></div>
+    </div>
+  </header>
+
+  <!-- Barra de navegación -->
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 link-secondary" href="index.html">Inicio</a>
+      <a class="p-2 link-secondary" href="#">Sobre mi</a>
+      <a class="p-2 link-secondary" href="#">Herramientas</a>
+      <a class="p-2 link-secondary" href="#">Proyectos</a>
+      <a class="p-2 link-secondary" href="#">Certificados</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container my-4">
+  <!-- Encabezado del laboratorio -->
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark shadow">
+    <div class="col-md-10 px-0">
+      <h1 class="display-4 fst-italic">Laboratorio de Path Traversal</h1>
+      <p class="lead my-3">File path traversal, traversal sequences stripped with superfluous URL-decode</p>
+      <p class="mb-0"><strong>Nivel:</strong> Practitioner | <strong>Tipo de explotación:</strong> PATH TRAVERSAL</p>
+    </div>
+  </div>
+
+  <div class="row g-5 mb-5">
+    <!-- SECCIÓN DE TEXTO DEL REPORTE -->
+    <div class="col-md-8">
+      <article class="blog-post p-4 bg-light rounded shadow-sm">
+        <h2 class="blog-post-title mb-4 border-bottom pb-2">Detalles del Reporte</h2>
+        
+        <h4 class="mt-4 text-primary">Objetivo del laboratorio</h4>
+        <p class="fs-6 text-justify">El objetivo de este laboratorio es explotar una vulnerabilidad de path traversal en la visualización de imágenes de productos donde la aplicación bloquea secuencias de escape comunes (como ../) y realiza una decodificación URL de la entrada; para resolverlo, debes evadir esta restricción lógica mediante el uso de una doble codificación URL y lograr extraer con éxito el contenido del archivo crítico del sistema operativo, /etc/passwd.</p>
+
+        <h4 class="mt-4 text-primary">Explicación técnica de la vulnerabilidad</h4>
+        <p class="text-justify">La vulnerabilidad radica en una deficiencia en el control de acceso y en la validación de entradas de la aplicación, la cual intenta mitigar el riesgo de path traversal decodificando la entrada y bloqueando únicamente las secuencias relativas de navegación (como ../). Al decodificar el payload una sola vez en la fase de inspección, no detecta el salto, pero posteriormente el backend lo procesa en su forma decodificada, lo que permite a un atacante acceder de manera ilegítima a recursos críticos del sistema operativo, tales como el archivo /etc/passwd.</p>
+
+        <h4 class="mt-4 text-primary">Procedimiento paso a paso</h4>
+        <ol>
+          <li class="mb-2">El proceso inicia con la apertura de la aplicación Burp Suite y el uso de su navegador integrado, el cual evita conflictos de configuración con certificados de seguridad.</li>
+          <li class="mb-2">En la sección Proxy > Intercept, se verifica que la función de intercepción se encuentre activada (Intercept is on) para pausar y capturar de manera temporal las peticiones HTTP.</li>
+          <li class="mb-2">Una vez capturada la solicitud HTTP objetivo (específicamente la petición GET /image?filename=), se hace clic derecho sobre ella para desplegar el menú contextual y se selecciona la opción Send to Repeater.</li>
+          <li class="mb-2">Dentro de la herramienta Repeater, se intenta enviar primero una ruta absoluta y luego un salto de directorio básico, obteniendo en ambos casos "No such file", lo que indica que el sistema implementa una validación.</li>
+          <li class="mb-2">Finalmente, para evadir los controles, se toma la secuencia de salto básica, se codifica en URL una primera vez, y este resultado se codifica una segunda vez para generar el payload final.</li>
+          <li class="mb-2">Al enviar la solicitud con la carga útil doblemente codificada, el servidor la procesa correctamente y devuelve una respuesta con el código de estado HTTP/2 200 OK, exponiendo el contenido íntegro del archivo /etc/passwd.</li>
+        </ol>
+
+        <h4 class="mt-4 text-primary">Explicación del payload</h4>
+        <p class="text-justify">El payload utilizado en este laboratorio consiste en una ruta de navegación relativa codificada doblemente en formato URL, específicamente: <code>%2520%2520%252f%2520%2520%252f%2520%2520%252fetc/passwd</code>. Esta estructura se introduce en el parámetro afectado y elude el filtro de la aplicación, ya que al decodificar %25 se obtiene un %, dejando el payload como %2e%2e%2f. Al no encontrar coincidencias exactas con la secuencia bloqueada, el filtro lo deja pasar.</p>
+
+        <h4 class="mt-4 text-primary">Mitigación recomendada</h4>
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item bg-transparent"><strong>Validación posterior a la decodificación:</strong> Asegurarse de que cualquier filtro de seguridad o verificación de listas negras se aplique después de que la entrada del usuario haya sido decodificada completamente (URL, Base64, etc.) hasta su representación final o canónica.</li>
+          <li class="list-group-item bg-transparent"><strong>Uso de funciones de mapeo seguro (Basename):</strong> Utilizar funciones integradas en el lenguaje de programación (como basename() en PHP o equivalentes) que extraigan únicamente el nombre del archivo solicitado.</li>
+          <li class="list-group-item bg-transparent"><strong>Validación mediante listas blancas (Whitelisting):</strong> Restringir los valores permitidos en los parámetros de entrada a un conjunto estricto de nombres de archivos válidos o identificadores predefinidos.</li>
+        </ul>
+
+      </article>
+    </div>
+
+    <!-- SECCIÓN PARA MOSTRAR EL PDF (Columna lateral) -->
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div class="card shadow-sm border-0 bg-light">
+          <div class="card-body">
+            <h5 class="card-title mb-3 text-center">Documento Original</h5>
+            
+            <!-- Etiqueta iframe para incrustar el PDF -->
+            <div class="ratio ratio-4x3 mb-3" style="min-height: 500px;">
+              <iframe src="lab10.pdf" title="PDF Viewer" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            
+            <div class="d-grid gap-2">
+              <a href="lab10.pdf" target="_blank" class="btn btn-outline-dark">Abrir PDF en pestaña nueva</a>
+              <a href="lab10.pdf" download class="btn btn-dark">Descargar PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="blog-footer text-center py-4 mt-5 bg-light border-top">
+  <p>Portafolio digital - CNO IV Seguridad Informática</p>
+  <p><a href="#" class="text-decoration-none text-secondary">Volver arriba</a></p>
+</footer>
+
+  </body>
+</html>
