@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Proyecto Final INTERAFAS · Portafolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <link href="blog.css" rel="stylesheet">
+  </head>
+  <body>
+    
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1"></div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="index.html">Portafolio</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center"></div>
+    </div>
+  </header>
+
+  <!-- Barra de navegación -->
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 link-secondary" href="index.html">Inicio</a>
+      <a class="p-2 link-secondary" href="#">Sobre mi</a>
+      <a class="p-2 link-secondary" href="#">Herramientas</a>
+      <a class="p-2 link-secondary" href="#">Proyectos</a>
+      <a class="p-2 link-secondary" href="#">Certificados</a>
+      <a class="p-2 link-secondary" href="RoadtoFame.html">Road to Hall of Fame</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container my-4">
+  <!-- Encabezado del Proyecto -->
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark shadow">
+    <div class="col-md-10 px-0">
+      <h1 class="display-4 fst-italic">Proyecto Final: Blindando la Información</h1>
+      <p class="lead my-3">Gobernanza, Cumplimiento y Seguridad Ofensiva en Infraestructura Crítica (INTERAFAS)</p>
+      <p class="mb-0"><strong>Elaborado por:</strong> José Carlos Ojeda Camacho</p>
+    </div>
+  </div>
+
+  <div class="row g-5 mb-5">
+    <!-- SECCIÓN DE TEXTO DEL REPORTE -->
+    <div class="col-md-8">
+      <article class="blog-post p-4 bg-light rounded shadow-sm">
+        <h2 class="blog-post-title mb-4 border-bottom pb-2">Resumen Ejecutivo del Proyecto</h2>
+        <p class="text-justify fs-6">Este proyecto integral consolida una estrategia de ciberseguridad y resiliencia institucional diseñada para el Organismo Intermunicipal de Agua Potable, Alcantarillado y Saneamiento (INTERAFAS). A través de 44 documentos operativos y estratégicos, se aborda la protección de la infraestructura hídrica metropolitana desde una perspectiva holística: identificando vulnerabilidades técnicas en entornos corporativos (IT) e industriales (OT), estableciendo un marco de gobernanza normativa basado en estándares internacionales, y diseñando protocolos estructurados para la contención técnica y mediática ante escenarios de crisis cibernética.</p>
+
+        <!-- REPORTE 1 -->
+        <h4 class="mt-5 text-primary">1. Informe de Seguridad Ofensiva (Red Teaming)</h4>
+        <p class="text-justify">Esta evaluación técnica rigurosa fue ejecutada sobre el entorno controlado INTERAFAS-LAB, empleando metodologías reconocidas globalmente como OWASP y MITRE ATT&CK para Sistemas de Control Industrial (ICS). El análisis expone un inventario crítico de 20 vulnerabilidades que permitieron modelar una cadena de ataque (Kill Chain) completa y progresiva. El vector de compromiso evolucionó desde la exfiltración de información sensible mediante inyecciones SQL ciegas y fallas de autorización (IDOR), pasando por la escalada de privilegios y falsificación de origen (IP Spoofing) en el perímetro, hasta alcanzar el compromiso de la infraestructura SCADA. Este último eslabón demostró la viabilidad de manipular de forma remota actuadores físicos y válvulas principales de la red de distribución. El informe concluye que la organización requiere transitar urgentemente hacia un modelo de Defensa en Profundidad, aislando de manera estricta los entornos IT y OT.</p>
+        
+        <div class="card shadow-sm border-0 mb-5">
+          <div class="card-body">
+            <div class="ratio ratio-4x3 mb-3" style="min-height: 450px;">
+              <iframe src="P02/02.OjedaCamachoJoseCarlos_InformeSeguridadOfensiva.pdf" title="Visor Informe Seguridad Ofensiva" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+              <a href="P02/02.OjedaCamachoJoseCarlos_InformeSeguridadOfensiva.pdf" target="_blank" class="btn btn-outline-dark">Abrir en pestaña nueva</a>
+              <a href="P02/02.OjedaCamachoJoseCarlos_InformeSeguridadOfensiva.pdf" download class="btn btn-dark">Descargar PDF</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- REPORTE 2 -->
+        <h4 class="mt-5 text-primary">2. Sistema de Gestión de Seguridad de la Información (SGSI)</h4>
+        <p class="text-justify">Documento que formaliza el gobierno institucional de la ciberseguridad alineado a la normativa internacional ISO/IEC 27001. Este instrumento define 20 políticas funcionales estructuradas para proteger el inventario de activos críticos de INTERAFAS, abordando tanto bases de datos y pasarelas de pago externas, como repositorios de firmware y centros de operación SCADA internos. Se incluye una exhaustiva metodología de evaluación de riesgos, matrices de responsabilidad (RACI) y el diseño de listas de verificación (Checklists) para auditorías internas. Entre las medidas correctivas más destacadas se encuentra la implementación de autenticación de doble factor (MFA), el uso de tokens por hardware (FIDO2) en entornos de operación hidráulica para eliminar la dependencia de contraseñas memorizables, y protocolos estrictos de segmentación perimetral e higiene digital.</p>
+        
+        <div class="card shadow-sm border-0 mb-5">
+          <div class="card-body">
+            <div class="ratio ratio-4x3 mb-3" style="min-height: 450px;">
+              <iframe src="P02/03.OjedaCamachoJoseCarlos_ISO27.pdf" title="Visor SGSI" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+              <a href="P02/03.OjedaCamachoJoseCarlos_ISO27.pdf" target="_blank" class="btn btn-outline-dark">Abrir en pestaña nueva</a>
+              <a href="P02/03.OjedaCamachoJoseCarlos_ISO27.pdf" download class="btn btn-dark">Descargar PDF</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- REPORTE 3 -->
+        <h4 class="mt-5 text-primary">3. Plan de Comunicación de Crisis</h4>
+        <p class="text-justify">Estrategia institucional esencial para gestionar la narrativa, proteger la reputación y minimizar el pánico social frente a contingencias cibernéticas de impacto severo (como el robo masivo de expedientes o el paro forzado del suministro de agua). El plan establece el gobierno de la crisis mediante un comité liderado por la Dirección General y define estrictos flujos de autorización informativa. Además, segmenta a los públicos objetivos (internos y externos) y predefine los mensajes de contención ("Holding Statements") y cierre adaptados a las 6 fases del incidente. Incorpora protocolos específicos para desmentir rumores, gestionar filtraciones de datos (leaks) sin comprometer investigaciones forenses, y coordinar de manera eficiente con entes gubernamentales y reguladores como la CONAGUA y el INAI.</p>
+        
+        <div class="card shadow-sm border-0 mb-5">
+          <div class="card-body">
+            <div class="ratio ratio-4x3 mb-3" style="min-height: 450px;">
+              <iframe src="P02/04.OjedaCamachoJoseCarlos_PlanComunicacionCrisis.pdf" title="Visor Plan Comunicacion" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+              <a href="P02/04.OjedaCamachoJoseCarlos_PlanComunicacionCrisis.pdf" target="_blank" class="btn btn-outline-dark">Abrir en pestaña nueva</a>
+              <a href="P02/04.OjedaCamachoJoseCarlos_PlanComunicacionCrisis.pdf" download class="btn btn-dark">Descargar PDF</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- REPORTE 4 -->
+        <h4 class="mt-5 text-primary">4. Plan de Respuesta Ante Incidentes (CSIRT)</h4>
+        <p class="text-justify">Metodología técnica y procedimental para que el Equipo de Respuesta de INTERAFAS (CSIRT) pueda abordar intrusiones informáticas de forma sistemática y auditable. El documento recorre las fases del ciclo de vida del incidente: Preparación, Detección, Análisis y Priorización, Contención (lógica y física), Erradicación y Recuperación segura. Su valor agregado radica en la creación de cinco Playbooks operativos detallados, los cuales actúan como manuales tácticos paso a paso para neutralizar vectores de ataque específicos, tales como Inyecciones SQL, enumeración de objetos inseguros (IDOR), manipulación remota de componentes industriales, suplantación de IPs y compromiso de credenciales. Finaliza con los lineamientos de la fase post-incidente, asegurando el levantamiento de métricas (MTTD, MTTR) y la generación de inteligencia accionable para sellar vulnerabilidades de manera definitiva.</p>
+        
+        <div class="card shadow-sm border-0 mb-2">
+          <div class="card-body">
+            <div class="ratio ratio-4x3 mb-3" style="min-height: 450px;">
+              <iframe src="P02/05.OjedaCamachoJoseCarlos_PlanRespuestaAnteIncidentes.pdf" title="Visor Plan Incidentes" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+              <a href="P02/05.OjedaCamachoJoseCarlos_PlanRespuestaAnteIncidentes.pdf" target="_blank" class="btn btn-outline-dark">Abrir en pestaña nueva</a>
+              <a href="P02/05.OjedaCamachoJoseCarlos_PlanRespuestaAnteIncidentes.pdf" download class="btn btn-dark">Descargar PDF</a>
+            </div>
+          </div>
+        </div>
+
+      </article>
+    </div>
+
+    <!-- SECCIÓN DE DESCARGAS EXTRAS Y NAVEGACIÓN (Columna lateral) -->
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        
+        <!-- Tarjeta de Descarga CSV -->
+        <div class="card shadow-sm border-0 bg-light mb-4">
+          <div class="card-body text-center">
+            <h5 class="card-title text-success mb-3">Datos del Proyecto</h5>
+            <p class="card-text text-muted small">Descarga el archivo CSV con los registros documentales, métricas operativas y datos de vulnerabilidades consolidados del proyecto INTERAFAS.</p>
+            <div class="d-grid gap-2 mt-3">
+              <a href="P02/INTERAFAS_181629_log.csv" download class="btn btn-success fw-bold">
+                ⬇ Descargar Archivo CSV
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Navegación Rápida -->
+        <div class="card shadow-sm border-0 bg-light">
+          <div class="card-body">
+            <h5 class="card-title mb-3 text-center">Contenido del Proyecto</h5>
+            <ol class="list-unstyled mb-0">
+              <li class="mb-2"><strong>1.</strong> Informe de Seguridad Ofensiva</li>
+              <li class="mb-2"><strong>2.</strong> Sistema de Gestión SGSI (ISO 27001)</li>
+              <li class="mb-2"><strong>3.</strong> Plan de Comunicación de Crisis</li>
+              <li class="mb-2"><strong>4.</strong> Plan de Respuesta a Incidentes</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="blog-footer text-center py-4 mt-5 bg-light border-top">
+  <p>Portafolio digital - CNO IV Seguridad Informática</p>
+  <p><a href="#" class="text-decoration-none text-secondary">Volver arriba</a></p>
+</footer>
+
+  </body>
+</html>
