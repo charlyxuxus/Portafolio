@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adquisición Forense con FTK Imager · Portafolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <link href="blog.css" rel="stylesheet">
+  </head>
+  <body>
+    
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1"></div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="index.html">Portafolio</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center"></div>
+    </div>
+  </header>
+
+  <!-- Barra de navegación -->
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 link-secondary" href="index.html">Inicio</a>
+      <a class="p-2 link-secondary" href="#">Sobre mi</a>
+      <a class="p-2 link-secondary" href="#">Herramientas</a>
+      <a class="p-2 link-secondary" href="#">Proyectos</a>
+      <a class="p-2 link-secondary" href="#">Certificados</a>
+      <a class="p-2 link-secondary" href="RoadtoFame.html">Road to Hall of Fame</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container my-4">
+  <!-- Encabezado del reporte -->
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark shadow">
+    <div class="col-md-10 px-0">
+      <h1 class="display-4 fst-italic">Actividad 16: La Verdad en los BITS</h1>
+      <p class="lead my-3">Adquisición forense con FTK IMAGER</p>
+      <p class="mb-0"><strong>Elaborado por:</strong> José Carlos Ojeda Camacho</p>
+    </div>
+  </div>
+
+  <div class="row g-5 mb-5">
+    <!-- SECCIÓN DE TEXTO DEL REPORTE -->
+    <div class="col-md-8">
+      <article class="blog-post p-4 bg-light rounded shadow-sm">
+        <h2 class="blog-post-title mb-4 border-bottom pb-2">Detalles del Reporte</h2>
+        
+        <h4 class="mt-4 text-primary">Objetivo</h4>
+        <p class="fs-6 text-justify">El objetivo principal de esta práctica es ejecutar, documentar y comprender exhaustivamente el proceso de adquisición forense de un dispositivo de almacenamiento físico (memoria USB) mediante la creación de una imagen exacta bit a bit, utilizando la herramienta de software AccessData FTK Imager. Se busca aplicar de forma rigurosa las primeras fases de la metodología estandarizada internacional para el análisis forense digital, asegurando la recolección y preservación intacta de la evidencia sin comprometer ni alterar los datos originales del dispositivo.</p>
+        <p class="fs-6 text-justify">Asimismo, la práctica tiene como propósito fundamental instruir en la correcta configuración de los metadatos vinculados a la cadena de custodia del caso, diferenciar teórica y prácticamente los distintos formatos de archivo para imágenes forenses, y validar la integridad matemática de la información adquirida. Esto último se logra a través de la generación, registro y cotejo de firmas, garantizando en última instancia que la evidencia digital recabada cuente con la inmutabilidad, verificabilidad y reproducibilidad técnica necesarias para ser presentada y admitida en investigaciones de respuesta a incidentes o peritajes de carácter legal.</p>
+
+        <h4 class="mt-4 text-primary">Herramientas Utilizadas</h4>
+        <ul>
+            <li><strong>Software:</strong> AccessData FTK Imager (versión 4.3.1.1)</li>
+            <li><strong>Dispositivo de evidencia:</strong> Memoria USB (Physical Drive)</li>
+        </ul>
+
+        <h4 class="mt-4 text-primary">Procedimiento General</h4>
+        <p class="text-justify">Para llevar a cabo esta práctica, el primer paso consistió en ejecutar el software FTK Imager con privilegios de administrador. Posteriormente, se configuró el entorno para realizar una copia física exacta de una memoria USB conectada al equipo de trabajo, definiendo la unidad de origen, el tipo de formato de imagen forense y los metadatos correspondientes a la cadena de custodia del caso.</p>
+
+        <h4 class="mt-4 text-primary">Parte I. Configuración y Adquisición de la Imagen Forense</h4>
+        <p class="text-justify">El proceso de adquisición comenzó accediendo al menú de la herramienta y seleccionando la opción "Create Disk Image". En la ventana de selección de fuente (Select Source), se eligió "Physical Drive" para garantizar una copia profunda del disco. El dispositivo señalado fue la unidad extraíble identificada en el sistema como \\.\PHYSICALDRIVE1 - YHZY USB USB Disk USB Device.</p>
+        <p class="text-justify">A continuación, se procedió a configurar el destino y el formato. Se seleccionó el formato de imagen forense Raw (dd). Este formato crudo realiza una copia idéntica (bit a bit) del dispositivo original; a diferencia del formato comercial E01 (el cual comprime los datos e incrusta metadatos del caso en el mismo archivo) o el formato SMART (diseñado originalmente para entornos basados en Linux), el formato Raw no comprime ni incluye metadatos integrados, lo que lo convierte en un formato de lectura universal compatible con cualquier herramienta forense.</p>
+        
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold">Parámetros de la Cadena de Custodia:</h6>
+            <ul class="mb-0">
+                <li><strong>Case Number:</strong> InfoCrim-01_21.11.2023</li>
+                <li><strong>Evidence Number:</strong> 00 (Original Adq)</li>
+                <li><strong>Unique Description:</strong> CNO IV - análisis de incidente de fraude bancario</li>
+                <li><strong>Examiner:</strong> Ojeda Camacho Jose Carlos</li>
+                <li><strong>Notes:</strong> Adquisición realizada en LIF de la UPSLP</li>
+            </ul>
+        </div>
+        <p class="text-justify mt-3">Finalmente, se indicó como directorio de salida la carpeta InfoCrim13 en el Escritorio. El archivo resultante fue nombrado infocrim_OjedaCamachoJose Calos, estableciendo un tamaño máximo por fragmento de 1500 MB (Image Fragment Size) y desactivando cualquier tipo de compresión o encriptación adicional.</p>
+
+        <h4 class="mt-4 text-primary">Parte II. Ejecución y Análisis de Resultados</h4>
+        <p class="text-justify">Al iniciar la captura, el software comenzó a leer y duplicar los sectores del disco. El registro de las marcas de tiempo arrojó que la adquisición inició formalmente el 8 de noviembre de 2026 a las 19:00:57. Tras procesar la totalidad de la unidad, el procedimiento concluyó de forma exitosa a las 19:19:17, tomando un tiempo total transcurrido de 18 minutos y 20 segundos (0:18:20).</p>
+        <p class="text-justify">Debido a la política de fragmentación configurada (1500 MB), la adquisición generó un total de 21 archivos en la carpeta de destino: 20 archivos de datos segmentados de manera secuencial (del.001 al.020) y 1 archivo de texto plano (.txt) generado automáticamente que funge como bitácora de todo el proceso.</p>
+        <p class="text-justify">Para concluir la actividad y asegurar la fiabilidad de la evidencia ante cualquier proceso legal, FTK Imager ejecutó una comprobación automática de la imagen (Drive/Image Verify Results). Los resultados finales arrojaron la lectura y copia de 61,440,000 sectores, sin encontrar bloques defectuosos en el proceso.</p>
+
+        <div class="alert alert-success mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">Firmas Criptográficas de Integridad:</h6>
+            <ul class="mb-0 text-break">
+                <li><strong>Hash MD5:</strong> 79dcdb9548110144dbe7c53cfde6a575</li>
+                <li><strong>Hash SHA-1:</strong> 9c066885b781bf18a57211737d90b02dccec50c4</li>
+            </ul>
+        </div>
+
+        <h4 class="mt-4 text-primary">Conclusión</h4>
+        <p class="text-justify">La realización de esta práctica permitió comprender y aplicar de manera práctica los protocolos estandarizados para la adquisición de evidencia digital en el ámbito de la informática forense. Mediante el uso de la herramienta FTK Imager, se logró generar exitosamente una copia bit a bit de una unidad física de almacenamiento utilizando el formato universal Raw (dd), lo cual es un paso fundamental para garantizar que los datos del dispositivo original permanezcan intactos e inalterados.</p>
+        <p class="text-justify">Asimismo, se comprobó la importancia crítica de preservar la cadena de custodia a través de la verificación de integridad criptográfica. La validación exitosa de las firmas Hash (MD5 y SHA-1) comprobó que la imagen forense generada es una réplica exacta y fidedigna de la evidencia original, libre de sectores defectuosos. Finalmente, la correcta segmentación de la imagen y la generación automática de la bitácora de adquisición demostraron ser prácticas esenciales para el manejo, almacenamiento y documentación eficiente de la evidencia, dejándola lista y con pleno respaldo legal para su posterior análisis pericial.</p>
+
+      </article>
+    </div>
+
+    <!-- SECCIÓN DE DESCARGAS EXTRAS Y NAVEGACIÓN (Columna lateral) -->
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        
+        <!-- Tarjeta de Descarga de Documentos PDF -->
+        <div class="card shadow-sm border-0 bg-light mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3 text-center">Documentación Original</h5>
+            <p class="text-muted small text-center">Accede a los reportes originales generados en esta actividad.</p>
+            
+            <h6 class="mt-4 text-primary">Reporte FTK Imager</h6>
+            <!-- Previsualización Reporte 1 -->
+            <div class="ratio ratio-4x3 mb-2" style="min-height: 300px;">
+              <iframe src="act16report.pdf" title="Visor Reporte FTK Imager" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-grid gap-2 mb-4">
+              <a href="act16report.pdf" target="_blank" class="btn btn-outline-dark text-start">📄 Abrir en pestaña nueva</a>
+              <a href="act16report.pdf" download class="btn btn-dark text-start">⬇ Descargar PDF</a>
+            </div>
+
+            <h6 class="mt-4 text-primary">Instrucciones UASLP</h6>
+            <!-- Previsualización Reporte 2 -->
+            <div class="ratio ratio-4x3 mb-2" style="min-height: 300px;">
+              <iframe src="Act16.pdf" title="Visor Instrucciones UASLP" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-grid gap-2">
+              <a href="Act16.pdf" target="_blank" class="btn btn-outline-dark text-start">📄 Abrir en pestaña nueva</a>
+              <a href="Act16.pdf" download class="btn btn-dark text-start">⬇ Descargar PDF</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="blog-footer text-center py-4 mt-5 bg-light border-top">
+  <p>Portafolio digital - CNO IV Seguridad Informática</p>
+  <p><a href="#" class="text-decoration-none text-secondary">Volver arriba</a></p>
+</footer>
+
+  </body>
+</html>
