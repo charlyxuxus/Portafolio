@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reporte de Laboratorio · Portafolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <link href="blog.css" rel="stylesheet">
+  </head>
+  <body>
+    
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1"></div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="index.html">Portafolio</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center"></div>
+    </div>
+  </header>
+
+  <!-- Barra de navegación -->
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 link-secondary" href="index.html">Inicio</a>
+      <a class="p-2 link-secondary" href="#">Sobre mi</a>
+      <a class="p-2 link-secondary" href="#">Herramientas</a>
+      <a class="p-2 link-secondary" href="#">Proyectos</a>
+      <a class="p-2 link-secondary" href="#">Certificados</a>
+      <a class="p-2 link-secondary" href="RoadtoFame.html">Road to Hall of Fame</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container my-4">
+  <!-- Encabezado del reporte -->
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark shadow">
+    <div class="col-md-10 px-0">
+      <h1 class="display-4 fst-italic">Actividad 17: Análisis Forense de Memoria</h1>
+      <p class="lead my-3">La memoria del crimen: extracción de evidencia de un volcado RAM</p>
+      <p class="mb-0"><strong>Elaborado por:</strong> José Carlos Ojeda Camacho</p>
+    </div>
+  </div>
+
+  <div class="row g-5 mb-5">
+    <!-- SECCIÓN DE TEXTO DEL REPORTE -->
+    <div class="col-md-8">
+      <article class="blog-post p-4 bg-light rounded shadow-sm">
+        <h2 class="blog-post-title mb-4 border-bottom pb-2">Detalles de la Investigación</h2>
+        
+        <h4 class="mt-4 text-primary">Objetivo de la investigación</h4>
+        <p class="fs-6 text-justify">El objetivo del presente informe es documentar el análisis forense de memoria volátil (RAM) sobre la evidencia digital obtenida de un presunto cibercriminal (alias "Morty"). Se busca identificar la configuración del sistema, credenciales comprometidas, direcciones de red involucradas (locales y externas), servicios maliciosos en ejecución (botnet, servidores Lunar) y el destino de los recursos financieros exigidos mediante extorsión criptográfica, utilizando la herramienta Volatility.</p>
+
+        <h4 class="mt-4 text-primary">Cuestionario Analítico y Extracción de Evidencia</h4>
+        
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">1. Entorno y Marca de Tiempo</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>.\volatility.exe -f OtterCTF.vmem imageinfo</code></p>
+            <p class="mb-1"><strong>Análisis ("Image local date and time"):</strong> Este resultado indica el momento exacto en que se capturó la memoria RAM del equipo (4 de agosto de 2018 a las 22:34:22 UTC+3). Permite fijar el ancla temporal de la investigación forense para correlacionarla con logs de red, registros de eventos y la actividad realizada por el atacante justo antes o durante el volcado.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">2. Sistema Operativo y Arquitectura</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>.\volatility.exe -f OtterCTF.vmem imageinfo</code></p>
+            <p class="mb-1">El cibercriminal operaba bajo un entorno Windows 7 Service Pack 1 de 64 bits (Win7SP1x64). Este perfil exacto es indispensable ya que deberás incluirlo como parámetro (<code>--profile=Win7SP1x64</code>) en todos los comandos subsecuentes de Volatility para que interprete correctamente las estructuras de memoria.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">3. Contraseña del Perfil</h6>
+            <p class="mb-1"><strong>Comandos:</strong></p>
+            <ul class="mb-2">
+                <li><code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 hashdump</code></li>
+                <li><code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 lsadump</code></li>
+            </ul>
+            <p class="mb-1"><strong>Contraseña identificada:</strong> MortyIsReallyAnOtter</p>
+            <p class="mb-0">Mediante el comando hashdump se identificó la cuenta del ciberdelincuente bajo el nombre de usuario Rick (con identificador 1000). Posteriormente, al ejecutar el comando lsadump, se obtuvieron los secretos de autenticación almacenados en la memoria RAM sin necesidad de aplicar fuerza bruta sobre el hash, ya que la herramienta localizó la entrada DefaultPassword exponiendo la contraseña que se encontraba almacenada en texto claro al momento de la captura en vivo.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">4. Direccionamiento IP Local</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 netscan</code></p>
+            <p class="mb-1"><strong>Dirección IP local de la máquina comprometida:</strong> 192.168.202.131</p>
+            <p class="mb-0">Esta es la dirección IP interna asignada al ordenador analizado, la cual aparece repetidamente como la dirección local (Local Address) en las conexiones de red establecidas por los procesos del sistema y aplicaciones del usuario.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">5. Llaves del Registro del Sistema</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 hivelist</code></p>
+            <p class="mb-1"><strong>Utilidad:</strong></p>
+            <ul class="mb-0">
+                <li>Permite mapear y extraer las ubicaciones virtuales y físicas de las colmenas (hives) del registro de Windows (como SYSTEM, SOFTWARE, SAM, SECURITY y los perfiles de usuario como ntuser.dat de Rick) presentes en la memoria RAM.</li>
+                <li>Es de gran utilidad en una investigación forense porque el Registro almacena información persistente fundamental, tal como la configuración del sistema, programas instalados, claves de ejecución automática (Run/RunOnce), cuentas de usuario, contraseñas almacenadas, metadatos de dispositivos conectados y rastros de la actividad reciente del atacante.</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">6. Nombre del Ordenador</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 printkey -K "ControlSet001\Control\ComputerName\ComputerName"</code></p>
+            <p class="mb-1"><strong>Nombre del ordenador:</strong> WIN-LO6FAF3DTFE</p>
+            <p class="mb-0">El valor registrado bajo la llave ComputerName revela el hostname de la máquina comprometida. Este nombre coincide directamente con las iniciales y claves institucionales proporcionadas en el planteamiento del caso de la actividad (FAF3 y TFE), vinculando formalmente el equipo analizado con la evidencia del objetivo potencial y los servidores Lunar.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">7. Identificación de Procesos Sospechosos</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 pstree</code></p>
+            <ul class="mb-0">
+                <li><strong>Proceso A: Rick And Morty (PID: 3820, PPID: 2728):</strong> Es el proceso principal que da nombre al contexto del caso y bajo el cual se ejecuta el software simulado del atacante. De este proceso desciende otro de los indicios clave (vmware-tray.ex con PID 3720).</li>
+                <li><strong>Proceso B: LunarMS.exe (PID: 708, PPID: 2728):</strong> Corresponde al software malicioso asociado a los servidores "Lunar" utilizados para publicitar a las víctimas, el cual mantiene conexiones activas hacia el exterior (IP maliciosa 77.102.199.102).</li>
+                <li><strong>Proceso C: BitTorrent.exe (PID: 2836, PPID: 2728):</strong> Representa el servicio Torrent utilizado por el cibercriminal para la distribución y exfiltración de archivos multimedia o videos de las víctimas con fines de extorsión y rescate.</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">8. Conexiones a Servidores Maliciosos</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 netscan</code></p>
+            <ul class="mb-0">
+                <li><strong>Dirección IP del servidor malicioso:</strong> 77.102.199.102</li>
+                <li><strong>Puerto utilizado:</strong> 7575</li>
+                <li><strong>Ubicación posible:</strong> Al consultar la IP en la plataforma de geolocalización, se ubica en Rusia, lo cual concuerda con la infraestructura de los servidores "Lunar".</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">9. Vectores de Ingeniería Social (Correos)</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 iehistory</code></p>
+            <ul class="mb-0">
+                <li><strong>Correos empleados:</strong> RickoPicko@mail.com</li>
+                <li><strong>Plataforma y navegador:</strong> Fueron abiertos a través de la plataforma web de correo mail.com utilizando el navegador Google Chrome.</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">10. Cartera de Criptomonedas (Proceso 3720)</h6>
+            <p class="mb-1"><strong>Comandos:</strong></p>
+            <ul class="mb-2">
+                <li><code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 cmdline -p 3720</code></li>
+                <li><code>.\volatility.exe -f OtterCTF.vmem --profile=Win7SP1x64 memdump -p 3720</code></li>
+            </ul>
+            <p class="mb-1">El comando <code>cmdline</code> revela que el proceso con PID 3720 corresponde a <code>vmware-tray.ex</code> (una suplantación de un binario legítimo), lanzado desde la carpeta temporal: <code>C:\Users\Rick\AppData\Local\Temp\RarSFX0\vmware-tray.exe</code>. Esto confirma el uso de un archivo autodescomprimible de WinRAR (SFX) para inyectar código.</p>
+            <p class="mb-1"><strong>Cartera de criptomoneda:</strong> 1MmpEmebJkqXG8nQv4cjJSmxZQFVmFo63M</p>
+            <p class="mb-0"><strong>Listas negras:</strong> Al verificar la billetera en el portal btcblack.it, se obtuvo como resultado que no figura como una dirección boletinada o reportada por actividades maliciosas.</p>
+        </div>
+
+      </article>
+    </div>
+
+    <!-- SECCIÓN DE DESCARGAS EXTRAS Y NAVEGACIÓN (Columna lateral) -->
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        
+        <!-- Tarjeta de Descarga de Documentos PDF -->
+        <div class="card shadow-sm border-0 bg-light mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3 text-center">Documentación Original</h5>
+            <p class="text-muted small text-center">Accede a los reportes originales generados en esta actividad.</p>
+            
+            <h6 class="mt-4 text-primary">Reporte Volatility</h6>
+            <!-- Previsualización Reporte 1 -->
+            <div class="ratio ratio-4x3 mb-2" style="min-height: 300px;">
+              <iframe src="ACT17REPOT.pdf" title="Visor Reporte Volatility" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-grid gap-2 mb-4">
+              <a href="ACT17REPOT.pdf" target="_blank" class="btn btn-outline-dark text-start">📄 Abrir en pestaña nueva</a>
+              <a href="ACT17REPOT.pdf" download class="btn btn-dark text-start">⬇ Descargar PDF</a>
+            </div>
+
+            <h6 class="mt-4 text-primary">Cuestionario</h6>
+            <!-- Previsualización Reporte 2 -->
+            <div class="ratio ratio-4x3 mb-2" style="min-height: 300px;">
+              <iframe src="OjedaCamachoJoseCarlos_Act17.pdf" title="Visor Cuestionario UASLP" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-grid gap-2">
+              <a href="OjedaCamachoJoseCarlos_Act17.pdf" target="_blank" class="btn btn-outline-dark text-start">📄 Abrir en pestaña nueva</a>
+              <a href="OjedaCamachoJoseCarlos_Act17.pdf" download class="btn btn-dark text-start">⬇ Descargar PDF</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="blog-footer text-center py-4 mt-5 bg-light border-top">
+  <p>Portafolio digital - CNO IV Seguridad Informática</p>
+  <p><a href="#" class="text-decoration-none text-secondary">Volver arriba</a></p>
+</footer>
+
+  </body>
+</html>
