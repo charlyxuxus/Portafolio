@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adquisición Forense en Escenas Digitales · Portafolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <link href="blog.css" rel="stylesheet">
+  </head>
+  <body>
+    
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1"></div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="index.html">Portafolio</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center"></div>
+    </div>
+  </header>
+
+  <!-- Barra de navegación -->
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 link-secondary" href="index.html">Inicio</a>
+      <a class="p-2 link-secondary" href="#">Sobre mi</a>
+      <a class="p-2 link-secondary" href="#">Herramientas</a>
+      <a class="p-2 link-secondary" href="#">Proyectos</a>
+      <a class="p-2 link-secondary" href="#">Certificados</a>
+      <a class="p-2 link-secondary" href="RoadtoFame.html">Road to Hall of Fame</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container my-4">
+  <!-- Encabezado del reporte -->
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark shadow">
+    <div class="col-md-10 px-0">
+      <h1 class="display-4 fst-italic">Actividad 19: Adquisición Forense</h1>
+      <p class="lead my-3">Los primeros minutos cuentan: adquisición forense en escenas del crimen digital</p>
+      <p class="mb-0"><strong>Elaborado por:</strong> José Carlos Ojeda Camacho</p>
+    </div>
+  </div>
+
+  <div class="row g-5 mb-5">
+    <!-- SECCIÓN DE TEXTO DEL REPORTE -->
+    <div class="col-md-8">
+      <article class="blog-post p-4 bg-light rounded shadow-sm">
+        <h2 class="blog-post-title mb-4 border-bottom pb-2">Procedimiento de Adquisición en Caliente</h2>
+        
+        <h4 class="mt-4 text-primary">Introducción y Marco de Referencia</h4>
+        <p class="fs-6 text-justify">El presente informe técnico-pericial documenta de manera exhaustiva los procedimientos de adquisición de evidencia digital en caliente realizados sobre un sistema operativo Windows comprometido en una escena de crimen digital simulada. En calidad de primer respondiente e investigador forense, el objetivo primordial radica en la preservación del estado volátil del equipo para capturar artefactos que, de apagarse la máquina, se perderían irreversiblemente. La recolección temprana de procesos en memoria, conexiones de red activas y configuraciones temporales constituye el pilar fundamental para la reconstrucción exacta de los eventos.</p>
+
+        <h4 class="mt-4 text-primary">Desarrollo y Resultados de la Adquisición</h4>
+        
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">1. Marca de Tiempo del Sistema</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>date > fechasistema.txt</code></p>
+            <p class="mb-1"><strong>Resultado:</strong> Sábado, 14 de noviembre de 2026 14:30:28.</p>
+            <p class="mb-0"><strong>Importancia:</strong> Permite calcular la deriva temporal (skew) del reloj local frente a un servidor NTP, anclando cronológicamente el incidente.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">2. Procesos en Ejecución</h6>
+            <p class="mb-1"><strong>Comando:</strong> <code>tasklist > ProcesosEjecutandose.txt</code></p>
+            <p class="mb-1"><strong>Resultado:</strong> Inventario con PIDs y nombres de imagen (smss.exe, csrss.exe, wininit.exe, lsass.exe).</p>
+            <p class="mb-0"><strong>Importancia:</strong> Permite detectar anomalías inmediatas, como rootkits o troyanos que operan exclusivamente en memoria RAM camuflados como procesos legítimos.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">3. Listado de Servicios (CMD vs PowerShell)</h6>
+            <p class="mb-1"><strong>Comandos:</strong> <code>get-service > ServiciosDispositivoA.txt</code> (PS) y <code>sc query > ServiciosDispositivos.txt</code> (CMD)</p>
+            <p class="mb-1"><strong>Resultado:</strong> PowerShell devuelve objetos estructurados y nombres amigables. CMD devuelve información de bajo nivel desde el Administrador de Control de Servicios (SCM).</p>
+            <p class="mb-0"><strong>Importancia:</strong> La creación de servicios anómalos es una técnica común de persistencia de malware.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">4. Usuarios y Red del Sistema</h6>
+            <p class="mb-1"><strong>Usuarios Activos:</strong> <code>.\NetUsers.exe > UsuariosLogueados.txt</code> revela sesiones interactivas locales activas.</p>
+            <p class="mb-1"><strong>Cuentas Históricas:</strong> <code>Get-LocalUser</code> revela el inventario completo (Administrador, charl, Invitado, etc.).</p>
+            <p class="mb-1"><strong>Información de Red:</strong> <code>ipconfig /all > InfoRed.txt</code> identifica el host (CharlyLap) y adaptadores físicos/virtuales (ej. VirtualBox 192.168.56.1).</p>
+            <p class="mb-0"><strong>Importancia:</strong> Permite detectar cuentas clandestinas, puertas traseras lógicas y túneles de comunicación anómalos.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">5. Conexiones, Puertos y Tabla ARP</h6>
+            <p class="mb-1"><strong>NetBIOS:</strong> <code>nbtstat -S</code> confirmó ausencia de conexiones activas.</p>
+            <p class="mb-1"><strong>Conexiones y Puertos:</strong> <code>netstat -anob > AplicacionesconPuertosAbiertos.txt</code> asoció puertos (ej. 135, 443) con binarios específicos (ej. svchost.exe, PID 1852).</p>
+            <p class="mb-1"><strong>Tabla ARP:</strong> <code>arp -a</code> documentó las interacciones recientes de capa de enlace en la LAN.</p>
+            <p class="mb-0"><strong>Importancia:</strong> Estas capturas instantáneas permiten aislar binarios que exfiltran datos activamente y detectar posibles ataques Man-in-the-Middle o movimiento lateral.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">6. Historiales y Cachés</h6>
+            <p class="mb-1"><strong>Caché DNS:</strong> <code>ipconfig /displaydns</code> identificó dominios accedidos recientemente (ej. edgedl.me.gvt1.com).</p>
+            <p class="mb-1"><strong>Redes Wi-Fi:</strong> <code>netsh wlan sh profiles</code> documentó el rastro geográfico del equipo (redes CNT_UPSLP, iPhone de Edgar, etc.).</p>
+            <p class="mb-1"><strong>Intérprete CMD:</strong> <code>doskey /history</code> volcó los comandos tipeados recientemente en la terminal activa.</p>
+            <p class="mb-0"><strong>Importancia:</strong> Revela actividad en segundo plano, intentos de ofuscación interactivos y la ubicación histórica del equipo.</p>
+        </div>
+
+        <div class="alert alert-secondary mt-3" role="alert">
+            <h6 class="alert-heading fw-bold border-bottom pb-2">7. Tareas, Recursos Compartidos y LogSistema.evtx</h6>
+            <p class="mb-1"><strong>Recursos Mapeados/Compartidos:</strong> <code>net use</code> y <code>net share</code> confirmaron que solo existían los recursos predeterminados de administración.</p>
+            <p class="mb-1"><strong>Tareas Programadas:</strong> <code>schtasks > TareasProgramadas.txt</code> listó automatizaciones que podrían ocultar backdoors temporizados.</p>
+            <p class="mb-1"><strong>Exportación EVTX:</strong> <code>wevtutil epl System C:\...\LogSistema.evtx</code> encapsuló la bitácora maestra del sistema para análisis offline.</p>
+            <p class="mb-1"><strong>Archivo Hosts:</strong> <code>Get-Content ...\hosts</code> confirmó su integridad, descartando secuestro estático de DNS.</p>
+            <p class="mb-0"><strong>Árbol de Directorios:</strong> Un script recursivo de PowerShell generó un perfilado MAC (Modified, Accessed, Created) masivo para buscar payloads anómalos.</p>
+        </div>
+
+        <h4 class="mt-4 text-primary">Conclusiones y Próximos Pasos Recomendados</h4>
+        <p class="text-justify">La ejecución pericial de la presente diligencia de adquisición en caliente concluye con resultados sumamente positivos en materia de preservación de la cadena de evidencia. El uso coordinado y cauteloso de intérpretes de comandos sin instalación garantizó la captura fiel del estado volátil de la máquina, minimizando el impacto sobre la memoria RAM (footprint).</p>
+        <p class="text-justify">Como siguientes pasos inmediatos, resulta imperativo proceder con el análisis offline y el procesamiento algorítmico del registro de eventos "LogSistema.evtx" para identificar secuencias de errores críticos o fallos repetitivos. De forma paralela, se recomienda llevar a cabo una auditoría de persistencia, analizando de manera quirúrgica las claves maestras del Registro de Windows y la matriz de conexiones de red consolidadas.</p>
+
+      </article>
+    </div>
+
+    <!-- SECCIÓN DE DESCARGAS EXTRAS Y NAVEGACIÓN (Columna lateral) -->
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        
+        <!-- Tarjeta de Descarga de Documentos PDF -->
+        <div class="card shadow-sm border-0 bg-light mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3 text-center">Documentación Original</h5>
+            <p class="text-muted small text-center">Accede a los reportes originales generados en esta actividad.</p>
+            
+            <h6 class="mt-4 text-primary">Reporte Pericial de Adquisición</h6>
+            <!-- Previsualización Reporte 1 -->
+            <div class="ratio ratio-4x3 mb-2" style="min-height: 300px;">
+              <iframe src="act19report.pdf" title="Visor Reporte Adquisición" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-grid gap-2 mb-4">
+              <a href="act19report.pdf" target="_blank" class="btn btn-outline-dark text-start">📄 Abrir en pestaña nueva</a>
+              <a href="act19report.pdf" download class="btn btn-dark text-start">⬇ Descargar PDF</a>
+            </div>
+
+            <h6 class="mt-4 text-primary">Instrucciones UASLP (Procedimiento)</h6>
+            <!-- Previsualización Reporte 2 -->
+            <div class="ratio ratio-4x3 mb-2" style="min-height: 300px;">
+              <iframe src="OjedaCamachoJoseCarlos_Act19.pdf" title="Visor Instrucciones UASLP" style="width:100%; height:100%; border:none; border-radius: 5px;"></iframe>
+            </div>
+            <div class="d-grid gap-2">
+              <a href="OjedaCamachoJoseCarlos_Act19.pdf" target="_blank" class="btn btn-outline-dark text-start">📄 Abrir en pestaña nueva</a>
+              <a href="OjedaCamachoJoseCarlos_Act19.pdf" download class="btn btn-dark text-start">⬇ Descargar PDF</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="blog-footer text-center py-4 mt-5 bg-light border-top">
+  <p>Portafolio digital - CNO IV Seguridad Informática</p>
+  <p><a href="#" class="text-decoration-none text-secondary">Volver arriba</a></p>
+</footer>
+
+  </body>
+</html>
